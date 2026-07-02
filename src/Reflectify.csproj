@@ -14,6 +14,7 @@
         <PackageId>CSharper77.Reflectify</PackageId>
         <PackageLicenseFile>License.txt</PackageLicenseFile>
         <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>

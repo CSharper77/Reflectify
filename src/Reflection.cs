@@ -11,7 +11,7 @@ public class Reflection : IReflection
     private ConcurrentDictionary<Type, List<Attribute>> TypeAttributes = new();
     private ConcurrentDictionary<Type, ConcurrentDictionary<MethodInfo, List<Attribute>>> TypeMethodsAndAttributes = new ();
     /// <summary>Cache of method parameter types keyed by MethodInfo.</summary>
-    public ConcurrentDictionary<MethodInfo, List<Type>> MethodParameters = new ();
+    private ConcurrentDictionary<MethodInfo, List<Type>> MethodParameters = new ();
 
     #region Properties and Attributes
     
