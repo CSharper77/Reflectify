@@ -7,7 +7,7 @@ namespace Reflectify;
 public static class Extensions
 {
     /// <summary>Registers the <see cref="Reflection"/> implementation as a singleton.</summary>
-    public static void AddReflectionHelper(this IServiceCollection services)
+    public static void AddReflectify(this IServiceCollection services)
     {
         services.AddSingleton<Reflection>();
     }
