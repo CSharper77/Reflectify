@@ -147,13 +147,13 @@ public class Reflection : IReflection
     }
 
     #region Dynamic Type Creation
-    public Type CreateDynamicType(string dynamicAssemblyName, string className, List<DynamicAttributeInfo> classAttributes, List<DynamicPropertyInfo> properties)
+    public Type CreateDynamicType(string dynamicAssemblyName, string className, List<DynamicAttributeInfo> classAttributes, List<DynamicPropertyInfo> properties, Type? baseType = null)
     {
         // 1. Setup basic assembly scaffolding
         AssemblyName assemblyName = new AssemblyName(dynamicAssemblyName);
         AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
         ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("DynamicRuntimeModule");
-        TypeBuilder typeBuilder = moduleBuilder.DefineType(className, System.Reflection.TypeAttributes.Public | System.Reflection.TypeAttributes.Class);
+        TypeBuilder typeBuilder = moduleBuilder.DefineType(baseType is not null ? $"{className}_inherits_{baseType.Name}" : className, System.Reflection.TypeAttributes.Public | System.Reflection.TypeAttributes.Class, baseType);
 
         // 2. Apply Class-Level Attributes
         foreach (var attr in classAttributes)
