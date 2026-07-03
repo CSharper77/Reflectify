@@ -1,4 +1,4 @@
-namespace Reflectify;
+namespace Reflectify.Models;
 
 /// <summary>Wraps a <see cref="System.Type"/> together with its custom attributes.</summary>
 public class ExtendedTypeInfo : AttributesInfo

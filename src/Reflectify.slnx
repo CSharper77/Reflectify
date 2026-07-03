@@ -1,4 +1,4 @@
 <Solution>
-  <Project Path="../ConsoleApp1/ConsoleApp1.csproj" Id="6381ef8c-a29a-4e58-9571-6fc24c85a382" />
   <Project Path="Reflectify.csproj" />
+  <Project Path="../tests/Reflectify.Tests/Reflectify.Tests.csproj" />
 </Solution>

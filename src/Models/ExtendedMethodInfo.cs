@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Reflectify;
+namespace Reflectify.Models;
 
 /// <summary>Wraps a <see cref="MethodInfo"/> together with its custom attributes and provides helpers for invocation.</summary>
 public class ExtendedMethodInfo : AttributesInfo

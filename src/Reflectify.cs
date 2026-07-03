@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using Reflectify.Models;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Reflection.Emit;
 
 namespace Reflectify;
 
-/// <summary>Default implementation of <see cref="IReflection"/> that caches type metadata and custom attributes.</summary>
-public class Reflection : IReflection
+/// <summary>Default implementation of <see cref="IReflectify"/> that caches type metadata and custom attributes.</summary>
+public class Reflectify : IReflectify
 {
     private ConcurrentDictionary<Type, ConcurrentDictionary<PropertyInfo, List<Attribute>>> TypePropertiesAndAttributes = new ();
     private ConcurrentDictionary<Type, List<Attribute>> TypeAttributes = new();
@@ -14,14 +15,26 @@ public class Reflection : IReflection
     /// <summary>Cache of method parameter types keyed by MethodInfo.</summary>
     private ConcurrentDictionary<MethodInfo, List<Type>> MethodParameters = new ();
 
+    public ReflectifyConfiguration ReflectifyConfiguration { get; }
+
+    public BindingFlags ReflectifyBindingFlags=>    
+        ReflectifyConfiguration.DetectionVisibility == DetectionVisibility.OnlyPublic
+             ? BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static 
+             : BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic;
+
+    public Reflectify(ReflectifyConfiguration reflectifyConfiguration)
+    {
+        ReflectifyConfiguration = reflectifyConfiguration;
+    }
+
     #region Properties and Attributes
-    
+
     private void InitializeTypePropertiesDictionary(Type type)
     {
         if (TypePropertiesAndAttributes.ContainsKey(type))
             return;
         
-        var properties = type.GetProperties();
+        var properties = type.GetProperties(ReflectifyBindingFlags);
         
         // get class attributes 
         var attributes = type.GetCustomAttributes().ToList();
@@ -92,7 +105,7 @@ public class Reflection : IReflection
         
         TypeMethodsAndAttributes[type] = new ConcurrentDictionary<MethodInfo, List<Attribute>>();
         
-        foreach (var methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static))
+        foreach (var methodInfo in type.GetMethods(ReflectifyBindingFlags))
         {
             var attributes = methodInfo.GetCustomAttributes().ToList();
             TypeMethodsAndAttributes[type].TryAdd(methodInfo, attributes);
