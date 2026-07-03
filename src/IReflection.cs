@@ -44,5 +44,5 @@ public interface IReflection
     /// <summary>Unwraps Nullable{T} to T, otherwise returns the original type.</summary>
     Type GetUnderlyingNonNullableType(Type type);
 
-    public Type CreateDynamicType(string dynamicAssemblyName, string className, List<DynamicAttributeInfo> classAttributes, List<DynamicPropertyInfo> properties);
+    public Type CreateDynamicType(string dynamicAssemblyName, string className, List<DynamicAttributeInfo> classAttributes, List<DynamicPropertyInfo> properties, Type? baseType = null);
 }
