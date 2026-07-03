@@ -9,6 +9,6 @@ public static class Extensions
     /// <summary>Registers the <see cref="Reflection"/> implementation as a singleton.</summary>
     public static void AddReflectify(this IServiceCollection services)
     {
-        services.AddSingleton<Reflection>();
+        services.AddSingleton<IReflection, Reflection>();
     }
 }
