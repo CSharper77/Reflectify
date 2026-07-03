@@ -1,9 +1,10 @@
+using Reflectify.Models;
 using System.Reflection;
 
 namespace Reflectify;
 
 /// <summary>Provides reflection services for inspecting types, properties, methods and their attributes.</summary>
-public interface IReflection
+public interface IReflectify
 {
     /// <summary>Returns all properties with their attributes for the given type.</summary>
     List<ExtendedPropertyInfo>? GetProperties(Type type);

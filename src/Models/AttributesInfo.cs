@@ -1,4 +1,4 @@
-namespace Reflectify;
+namespace Reflectify.Models;
 
 /// <summary>Base class providing attribute lookup for reflected members.</summary>
 public class AttributesInfo

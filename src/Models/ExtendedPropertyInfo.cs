@@ -1,4 +1,5 @@
-namespace Reflectify;
+namespace Reflectify.Models;
+
 using System.Reflection;
 
 /// <summary>Wraps a <see cref="System.Reflection.PropertyInfo"/> together with its custom attributes.</summary>
